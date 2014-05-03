@@ -1,0 +1,968 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\pdfmapfile{+sansmathaccent.map}
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+ \geometry{margin=1in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+%\usepackage{indentfirst}
+%\parindent 8pt
+
+% set spacing
+\usepackage{setspace}
+\doublespace
+%\onehalfspace
+
+
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{rotating}
+\usepackage{tikz}
+\usetikzlibrary{snakes}
+\usepackage{array}
+\usepackage{caption}%
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancyw
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%\usepackage[firstinits=true,maxbibnames=99]{biblatex}
+%\bibliography{references}
+\usepackage{harvard}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Minor Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Comments
+\newcommand{\nothing}[1]{} \nothing{This allows you to make long comments} 
+
+% Make footnotes (but not endnotes) single-spaced
+\newcommand{\nfootnote}[1]{{\setstretch{1.0}\footnote{#1}}}
+
+\newtheoremstyle{exampstyle}
+  {\parskip} % Space above
+  {\parskip} % Space below
+  {\itshape} % Body font
+  {0pt} % Indent amount
+  {\bfseries} % Theorem head font
+  {.} % Punctuation after theorem head
+  {5pt plus 1pt minus 1pt} % Space after theorem head
+  {} % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{exampstyle}
+
+\newtheorem*{definition*}{Definition}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem*{proposition*}{Proposition}
+
+\newtheorem{corollary}{Corollary}
+\newtheorem*{corollary*}{Corollary}
+
+\newtheorem*{statics}{Comparative Staistic}
+
+\newcommand{\opt}{{\mbox{${\star}$}}}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+
+\newcommand{\eq}[1]{\begin{align}#1\end{align}}
+
+\newcommand{\la}{ \left < }
+\newcommand{\ra}{ \right > }
+
+\newcommand{\wtE}{ \widetilde{E}}
+
+\renewcommand{\qedsymbol}{} % shut off QED symbol in proofs
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% END Article customizations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{10pt} 
+%%%%%%		Title Page			%%%%%%%
+
+\title{Optimal Incentives with Knightian Learning}
+
+\author{Seong Byun\thanks{
+Ph.D. Candidate at the Department of Finance and Managerial Economics, The University of Texas at
+Dallas, Jindal School of Management SM31, 800 Campbell Road, Richardson, TX
+75080. E-Mail: byun@utdallas.edu. I am indebted to my advisors Michael Rebello and Robert Kieschnick, and to Nina Baranchuk, Amanda Besch, Bernhard Ganglmair, Valery Polkovnichenko, L. Malcolm Wardlaw, and Harold Zhang for their invaluable guidance and comments on this paper. I also thank the seminar participants at The University of Texas at Dallas (2013).}}
+
+%\date{PRELIMINARY DRAFT \\ December 2013}
+\date{March 2014}
+\maketitle
+
+\begin{abstract}
+[Insert Abstract Here]
+
+Key words: compensation; optimal contracting; ambiguity; Knightian uncertainty; bandit model; learning;
+
+JEL: D86, G30, O32.
+
+\end{abstract}
+
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{1}
+
+
+%%%%%%		Anonymous Title Page			%%%%%%%
+\begin{center}
+\Large{Optimal Incentives with Knightian Learning}
+\end{center}
+
+\vspace{.5in}
+
+
+
+\begin{abstract}
+[Insert Abstract Here]
+
+Key words: compensation; optimal contracting; ambiguity; Knightian uncertainty; bandit model; learning.
+
+JEL: D86, G30, O32.
+
+\end{abstract}
+
+
+
+\thispagestyle{empty}
+\clearpage
+\setcounter{page}{1}
+
+
+
+%%%%%%%%%%%%%	Introduction 	%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{introduction}
+
+People often face the challenge of leaving their status quo to take on unfamiliar and uncertain endeavors. Motivating people to take on such challenge is an important issue for cultivating research and innovation, as well as enhancing education and personal development (Holmstrom (1989), Holmstrom and Milgrom (1991), Aghion and Tirole (1994), and Manso (2011)). But taking on with uncertain endeavors often generates new information and experience that can change people's prior beliefs and expectation about the future. Thus, motivating people to take on uncertainty and learning requires consideration not only ex-ante uncertainty, but also the future uncertainty that may change over time. Indeed, prior studies have examined the optimal incentives with \emph{Bayesian learning}, in which the agent updates his prior conditional on the information generated from earlier periods through Bayes' law (e.g., Acemoglu, Chernozhukov, and Yildiz (2007), DeMarzo and Sannikov (2008), Manso (2011), He, Li, Wei and Yu (2014)). In this paper, I examine the optimal incentives for motivating experimentation under \emph{Knightian learning}, in which learning directly affects the degree of uncertainty itself.  
+
+I model agent's uncertainty as ambiguity, in which the agent behaves as if he has in mind multiple possible distributions that the payoffs from new task can follow, and that he cannot assign a subjective probability to these distributions to be able to come up with a single expected prior. When he experiments with a new task, he receives a signal, which is used to update his belief within each prior according to Bayes' law. However, learning can also reduce agent's ambiguity concerning the new task, which can either reduce the set of possible distributions\footnote{Alternatively, the agent receives information that he can use to come up with a subjective probability distribution over the set of distributions.}, which can reflect agent's increased confidence and experience in the new task. Alternatively, if learning generates highly contrasting signals about the future, then learning can create doubt, which can lead to an increase in ambiguity.  
+
+The agent then faces the choice between implementing a conventional task with a known distribution versus a new task with multiple priors and a possibility for learning. The optimal incentives for motivating learning then requires setting the compensation structure such that agent's payoffs for taking on the new task must be greater than the payoffs for taking on conventional task that do not involve learning. I show that the characteristics of the optimal incentives significantly differ depending on how learning affects future uncertainties. 
+
+How it differs from risk models (first and second moments). 
+
+
+%%%%%%  Bandit with multiple priors   %%%%%%%
+\section{Two-Armed Bandit Problem with Multiple Priors}
+\label{bandit}
+To explore learning in an ambiguous environment, I utilize the Bayesian learning model known as the multi-armed bandit problem. In this section, I describe the special case of two-armed bandit problem, and the extend it to incorporate \emph{Knightian learning} and ambiguity by allowing for multiple priors on the agent's belief. The two-armed bandit problem models the tension between a tried-and-true method that involves zero learning and a new method that the agent can learn over time. 
+
+\subsection{Model Setting}
+
+Consider a two-period setting ($T=2$), where, in each period, the agent takes an action $ i \in I$, which results in a payoff $S$ with probability $p_i$ and a payoff $F$ with probability $1-p_i$, with $S>F$. The probability of success $p_i$ is uncertain, but can be inferred through experimentation. The expected probability of success for action $i$ in the second period is conditional on the first period outcome, with $E[p_i | S, j]$ denoting the expected probability of success for action $i$ conditional on action $j$ being a success in the first period, and $E[p_i | F, j]$ the action $i$'s expected probability of success conditional on action j being a failure in the first period. Here I assume that experimenting with action $i$ creates knowledge relevant only for the same action, such that $E[p_i | S, j] = E[p_i | F, j] = E[p_i]$ for $i \neq j$. We denote the agent's strategy as $<\!i^j_k\!>$, where $i$ is the first period action, $j$ is the second period action conditional on success in the first period, and $k$ is the second period action conditional failure in the first period. 
+
+In the special case of two-armed bandit problem with two possible actions $I={1,2}$, the first action ($i=1$) is an old method that involves zero learning, and the second action ($i=2$) is a new action that involves learning over time. The old method's ($i=1$) probability of success is known in both periods, and is equal to $  E[p_1] = p_1 = E[p_1 | S,1] = E[p,2 | F, 1]$. The new action's ($i=2$) probability of success, in contrast, is unknown to the agent. The agent begins with a prior $E[p_2]$, but can learn by inferring likelihood of success from the first period outcome. If the agent experiments with the new method in the first period, and the method is successful, then the agent updates his belief by adjusting his prior upward, such that $E[p_2 | S,2]>E[p_2]$. On the other hand, if the experimentation with the new method is a failure in the first period, then the agent adjusts his belief by updating his expected probability downward, i.e., $E[p_2] > E[p_2 |F, 2]$. Hence, the amount of learning is reflected by the changes in in belief, $E[p_2|S,2] - E[p_2]$ and $E[p_2] - E[p_2|F.2]$. 
+
+I extend the traditional two-armed bandit problem to examine the possibility of learning taking place in an ambiguity environment. Ambiguity can enter the process of learning in two ways. First, the agent can have an ex-ante ambiguity about the prospect of the new method, which can be resolved over time through learning. I incorporate the ex-ante uncertainty of learning by setting the agent's prior on the new method $E[p_2]$ to be a set of possible values, rather than a singleton:
+\be
+E[p_2] \in P_{2} \equiv [\overline{E[p_2]}- \epsilon_1, \overline{E[p_2]} + \epsilon_1 ] . 
+\ee
+
+$\overline{E[p_2]}$ is the \emph{a priori} expected probability of success, which corresponds to the agent's prior if he puts equal weight on all possible distributions. The parameter $\epsilon_1$ captures the degree of ex-ante ambiguity facing the agent in the first period. In the case where $\epsilon_1 = 0$, then the set of expectations of success becomes a singleton, and we are back to the case of traditional two-armed bandit model where $E[p_2]$ is a single value.
+
+Secondly, the process of learning itself can generate ambiguity that is independent from the ex-ante ambiguity. When the knowledge generated by learning creates widely conflicting signals, the agent, rather than incorporating the signals to come up with a single belief, can be ambiguous towards the signals being generated. Thus, the conditional expected probability becomes a set, rather than a single prior, such that 
+\eq{
+E[p_2 |S,2] & \in P_{2|S} \equiv \left [\overline{E[p_2 |S,2]}- \epsilon_{2,S},\; \overline{E[p_2 |S,2]} + \epsilon_{2,S} \right] \text{ and}  \\
+E[p_2 |F,2] & \in P_{2|F} \equiv \left [\overline{E[p_2 |F,2]}- \epsilon_{2,F},\; \overline{E[p_2 |F,2]} + \epsilon_{2,F} \right] \notag,	
+} 
+
+where $\overline{E[p_2 |S,2]}$ and $\overline{E[p_2 |S,2]}$ are once again the \emph{a priori} expected probability of success conditional on the first period outcome. The parameters $\epsilon_{2,S}$ and $\epsilon_{2,F}$ determine the quality of signals generated from learning, and thus, reflect the degree of ex-post ambiguity after the first period. The degree of ambiguity from learning can be asymmetric if the $\epsilon_{2,S}$ and $\epsilon_{2,F}$ have different magnitudes; positive but highly diffused signals can increase the agent's expectation, but it can also increase his uncertainty and doubt at the same time. On the other hand, negative but highly consistent signals may reduce the agent's expectation, but it can reduce or eliminate any uncertainty that the agent has ($\epsilon_{2,S} > \epsilon_{2,F}$). The opposite situation may also be possible. Unless otherwise noted, I will assume that $\epsilon_2 = \epsilon_{2,S} =\epsilon_{2,F}$.
+
+The expected payoff for implementing a $<\!i^j_k\!>$ strategy is equal to
+\begin{align}
+R(<\!i^j_k\!>) =& E[p_i] S + (1-E[p_i]) F  \\
+& + E[p_i] \{E[p_j|S,i] S + (1-E[p_j | S,i]) F \}  \notag \\
+& + (1-E[p_i]) \{E[p_k | F,i] S+(1-E[p_k|F,i]) F \} \notag
+\end{align}
+
+The ambiguity-averse agent has as multiple priors utility (Gilboa and Schmeidler (1989) and Epstein and Schneider (2008)), in which the agent makes decision by choosing the prior that would give him the lowest utility. Therefore, under this two-armed bandit problem with multiple priors, the agent chooses an action plan $\la i^j_k \ra$ and his priors that satisfies the following problem:
+\be
+\max_{<i^j_k\!>}{ \min_{p_2} R\left(\la i^j_k \ra\right)},
+\ee
+where $p_2 = \{E[p_2],E[p_2|S,2],E[p_2|F,2]\}$ denote the set of agent's beliefs containing $ E[p_2] \in P_2, E[p_2|S,2] \in P_{2|S}$, and $E[p_2|F,2] \in P_{2|F}$.
+
+Because the payoff from success is greater that the payoff from failure ($S>F$), the prior with the lowest payoff for the agent will always be the minimum of the set of priors, 
+\eq{
+{\arg \min}_{p_2} R\left(\la i^j_k \ra\right) &= \left \{\overline{E[p_2]} - \epsilon_1, \overline{E[p_2|S,2]} - \epsilon_{2,S},  \overline{E[p_2|F,2]} - \epsilon_{2,F} \right \} \notag \\
+& = \left \{E^L[p_2],\; E^L[p_2|S,2],\; E^L[p_2|F,2] \; \right \} \notag .
+}
+
+\subsection{Tension between Exploration and Exploitation Under Ambiguity}
+
+Consider now the following case:
+%
+\[ E^L[p_2] < p_1 < E^L[p_2 |S,2], \]
+%
+where the new method's expected probability of success is lower than that of the old method in the first period, but may be higher in the second period conditional on observing success from the new method. Thus, the agent may want to experiment and learn to reap the potential benefit in the second period. Under this condition, only two action plans need to be considered: $<\! 1_1^1 \!>$, the exploitation that involves zero learning by implementing a known strategy in both periods, and $<\! 2^2_1 \!>$, the exploration strategy, which implements the new method in the first period, and implements the new method again if the first period was a success, and goes back to the old method if the new method is a failure. The conditional response of the agent in the second period comes from the fact that the agent incorporates the new information generated from experimenting with the new method in the first period. It can be shown that all the other strategies are inferior to these two strategies.                                                                                                                                                                                           
+Comparing the payoff of the two strategies, the agent will take on exploration of the new method if and only if:
+%
+\eq{
+\label{main_condition}
+ (\overline{E[p_2]} - \epsilon_1) (1+\overline{E^L[p_2|S,2]} - p_1  - \epsilon_{2,S})  > p_1.
+}
+%
+From this equation, we see that exploration is more likely when the prior expectation for the new method ($\overline{E[p_2]}$) is high and also when the experimentation in the first period leads to a greater revision of agent's belief about the new method's probability success ($\overline{E^L[p_2|S,2]} - p_1$). Thus, experimentation is more likely when learning generates new information that is different from agent's prior beliefs. I will refer to this term $\overline{E^L[p_2|S,2]} - p_1$ as \emph{Bayesian learning} since the agent updates his prior based on Bayes' law. 
+
+Furthermore, we can see from (\ref{main_condition}) that both ex-ante ambiguity ($\epsilon_1$) and the ex-post ambiguity from learning ($\epsilon_{2,S}$) can influence agent's propensity to take on experimentation, even if it does not generate \emph{Bayesian learning}. We can consider two ways in which learning affects agent's uncertainty: when learning reduces agent's uncertainty and when learning increase agent's uncertainty. 
+
+\subsection{Case 1: Learning reduces uncertainty ($\epsilon_1 > \epsilon_2$)}
+Consider the case where the agent faces an ex-ante ambiguity in the first period i.e., $\epsilon_1 > 0$, but learning can eliminate agent's ambiguity in the second period, i.e., $\epsilon_2 = 0$. Then, even if the agent does benefit from Bayesian learning ($\overline{E[p_2]} = \overline{E^L[p_2|S,2]}$), the agent will nonetheless choose to implement the new method if $\overline{E^L[p_2|S,2]} - p_1 > \frac{p_1}{\overline{E[p_2]} - \epsilon_1}$. Thus, the reduction in the ex-post ambiguity, which increases the agent's expected utility in the second period is more than enough to offset the ex-ante ambiguity $\epsilon_1$ in the first period. Hence, the improvement in the quality of the signal generated from learning, apart from the direction of the signal, can benefit the agent. This condition is analogous to a situation in which learning takes place because, despite the absence of news, people's interpretation of the news improves over time.
+
+Furthermore, the agent may prefer to take on the new method even if he receives a negative signal from the first period, if he can benefit from Knightian learning. Consider a different case where $\overline{E[p_2]} >\overline{E^L[p_2|F,2]} > p_1 > \overline{E[p_2]} - \epsilon_1$, and $\epsilon_2=0$. Then, although the ex-ante uncertainty makes the conventional method, $i=1$, more attractive to the agent, the reduction in ambiguity after the first period ($\overline{E^L[p_2|F,2]} - p_1$ ) can make implementing the new method more attractive. This condition reflects a situation in which the agent receives a bad but very precise signal, and the benefit from the precision of the signal offsets the negative news. Therefore, when Knightian learning reduces the ambiguity in the second period, then experimentation is more attractive to the agent. Likewise, the magnitude of Knightian learning can more than offset the changes in agent's priors from the traditional Bayesian learning.
+
+
+\subsection{Case 2: Learning increases uncertainty ($\epsilon_1 < \epsilon_2$)} 
+Just as an agent under Bayesian learning can adjust his prior both upwards and downwards depending on the signal, the uncertainty under Knightian learning can also go in both directions. If the agent receives multiple signals that sharply contrasts each other (low precision), then the agent's ambiguity may increase, rather than decrease, from learning. Such situations may arise when a student enters into a research field that is highly controversial and with divided schools of thought. Once delving into the field, the agent may see a contrasting evidence and foster doubt and even an increase in uncertainty. This ex-post uncertainty can discourage the agent from going into the field. Such situation can arise when $\epsilon_1 < \epsilon_2$. Suppose we have zero ex-ante uncertainty ($\epsilon_1=0$) and no Bayesian learning ($\overline{E[p_2]} = \overline{E^L[p_2|S,2]}$). Then we can see from equation (\ref{main_condition}) that, despite the absence of initial uncertainty, the expected future uncertainty from learning can prevent the implementation of learning if  $1+\overline{E^L[p_2|S,2]} - p_1  - \epsilon_{2,S}  > \frac{p_1}{\overline{E[p_2]}}$. 
+
+If the ambiguity generated from learning is high enough, it can offset the benefits from Bayesian learning. Suppose that the agent receives signals that are on average positive about the future, with $\overline{E^L[p_2|S,2]} > p_1 > \overline{E[p_2]}$. However, the signals are highly contrasting, which makes the signal precision is very low, resulting in $\overline{E^L[p_2|S,2]} - \epsilon_2 < p_1$. Then, the condition in equation (\ref{main_condition}) is violated; despite the fact that the overall signal is positive, the agent's expected ambiguity in the future makes exploration less likely. 
+
+In sum, when learning directly affects the degree of agent's ambiguity towards a new task, learning can both enhance or reduce agent's propensity to take on new tasks. When learning is associated with high quality of signals that reduces future ambiguity, then learning complements the effect of Bayesian learning and makes the new task more attractive. On the other hand, when learning is associated with poor quality signals that increase future ambiguity, then the agent is likely to avoid learning by taking on a conventional task at the cost of foregoing a new task. We can see from the these mechanisms that incentivizing agents towards learning will then depend heavily on how learning affects uncertainty. We will see in the following section that the optimal incentives for exploration under Knightian learning sharply contrasts the optimal incentives derived under Bayesian learning. For example, what is an optimal contract for innovation in existing models can arise as optimal contract for implementing the conventional method in the presence of Knightian learning. 
+
+
+%%%%%%  The Principal-Agent Problem  %%%%%%%
+\section{The Principal-Agent Model}
+
+In this section, I embed the two-armed bandit model with multiple priors to the principal-agent model, and solve for the optimal incentive scheme that implements the exploration of new method, which involves both Bayesian and Knightian learning, and the one that implements the exploitation of old method, which does not involve learning at all. This is also an extension of Essay I into two periods. 
+
+In the single period framework, innovation is modeled as the task with higher levels of ambiguity. This is similar in nature to the Holmstrom's (1989) model of innovation, which is modeled as the project with a higher degree of noise in the measurement of effort. Although these approaches signify the uncertain nature of innovation, they do not fully characterize the experimental nature of innovation that requires innovators to constantly try new ideas and to learn from their success and failures. Scholars including Schumpeter(1934) and Arrow(1969) have indeed portrayed innovation in such a manner and have studied the innovation process in a Bayesian decision framework  which allows for learning. The Bayesian decision model known as the bandit problem has been widely used in the industrial organization literature (See Manso(2011) for details) and recently adopted in the context of incentives( Manso(2011)) and in bankruptcy laws (Acharya and Subramanian (2009))\footnote{While their main part of the paper deal with empirical evidence regarding bankruptcy laws and innovation, they provide a theoretical model of their argument in the appendix by modeling innovating as a bandit problem.} and their effects on innovation. 
+
+The set-up remains the same except that the principal now offers a contract to the agent to work. The agent incurs a private cost for working, which is $ c_1 $ for the conventional method and $ c_2 $ for the new method. If $c_2>c_1$, then implementing a conventional method is more attractive than the new method for the agent, which may occur, for instance, if implementing a new method requires the agent to incur additional cost of learning to work in a new environment. On the other hand, $c_2=<c_1$ can reflect a situation in which the agent is bored with implementing a conventional method, and is attracted to trying new strategy. In addition, the agent has an option to shirk, in which case he does not incur a cost of effort, but the probability of success associated with shirking is lower than both the conventional method and the new method, $E[p_0]<E[p_i]$ for $i=1,2$.
+
+The principal does not observe the actions taken by the agent, so that the principal can offer a contract contingent only on the outcome of the action. The principal is \emph{ambiguity-neutral} and that the agent is \emph{ambiguity-averse}.with an \nocite{ES:2010} Epstein and Schneider (2008) utility, which is a dynamic extension of \nocite{GS:1989} Gilboa and Schmeidler (1989)'s multiple priors utility. 
+
+The principal offers the following contract to the agent which is contingent on the outcome in periods 1 and 2:
+%
+\[ \vec{w} =\{ w_S, w_F, w_{SS}, w_{SF}, w_{FS}, w_{FF}. \}\]
+%
+The expected wage cost to the principal for implementing the action $\la i^j_k \ra$ is 
+%
+\eq{
+W(\vec{w}, \la i^j_k \ra) =& \overline{E}[p_i]w_S + (1-\overline{E}[p_i] ) w_F  \\
+& +\overline{E}[p_i]  \{ \overline{E}[p_j | S,i] w_{SS} + (1-\overline{E}[p_j | S,i] )w_{SF} \}     \notag \\
+& +(1-\overline{E}[p_i] ) \{ \overline{E}[p_k|F,i] w_{FS} + (1-\overline{E}[p_k|F,i]) w_{FF} \} , \notag
+}
+where the $ \overline{E}[.]  $ represents the expected probability associated with a subjective probability distribution that assigns an equal probabilities to the distributions. 
+
+Since the principal is ambiguity-neutral, the expected wage is the principal's expected dis-utility from paying the agent. The agent's expected utility from wage, however, is different from the principal's expected cost due to ambiguity-aversion. The agent's expected utility from implementing the action $\la i^j_k \ra$  with the given contract $\vec{w}$ is the following:
+%
+\eq{
+\label{minimax}
+W_a(\vec{w}, \la i^j_k \ra) =& \min_{p_2 \in P_2} \{W(\vec{w}, \la i^j_k \ra)  - C(\la i^j_k \ra) \} \\
+=& \widetilde{E}[p_i]w_S + (1-\widetilde{E}[p_i]])w_F  \notag \\
+&+\widetilde{E}[p_i] \{ \widetilde{E}[p_j | S,i] w_{SS} + (1-\widetilde{E}[p_j | F,i] ) w_{FF} \}      \notag \\
+&+(1-\widetilde{E}[p_i]) \{ \widetilde{E}[p_k|F,i] w_{FS} + (1-\widetilde{E}[p_k|F,i])w_{FF} \} , \notag \\
+&- \{ c_i + \widetilde{E}[p_i] c_j + (1-\widetilde{E}[p_i]) c_k \} \notag 
+}
+where the $\widetilde{E}[.]$ represents the expectation formed under the prior that solves Equation (\ref{minimax}), and $C(\la i^j_k \ra)$ is the agent's expected cost of effort.
+
+The optimal contract $\vec{w}^* $ that implements the desired action $ \la i^j_k \ra$ is then the contract with the minimum cost possible that satisfies the agent's incentive compatibility constraints:
+\[ \vec{w}^* = \arg\min W(\vec{w}, \la i^j_k \ra)  \]
+%
+subject to the IC constraints
+\[ W_a(\vec{w}^*, \la i^j_k \ra)  - C(\la i^j_k \ra) \ge W_a(\vec{w}^*, <l^m_n>)  - C(<l^m_n>) \hspace{.5in} \text{IC$(<l^m_n>)$} \]
+%
+I assume that the IR constraint is non-binding with a reservation utility of zero. Thus, there are twenty-six IC constraints (since there are twenty-seven different permutations of the action choices) with 6 unknowns. Following Manso (2011), if there are more than one contract that solves the above problem,  I define the optimal contract to be the one that pays the agent earliest. This contract will arise as an optimal contract in a case where there exists a time discount factor. 
+
+Given the optimal contract, the principal's ultimate problem is to choose an action $\la i^j_k \ra$ that maximizes his expected payoff,
+\be
+\max_{\la i^j_k \ra} { \Pi(\la i^j_k \ra) = R(\la i^j_k \ra) -  W(\vec{w}^*, \la i^j_k \ra) }
+\ee
+%
+The principal-agent set-up here contains several different models as a special case. If the costs of effort for both the conventional and the new actions are zero, i.e., $c_1=c_2=0$, then the agency conflict is eliminated and the problem becomes the two-armed bandit problem with multiple priors from the previous section. If the cost of implementing a new method is high, $c_2= \infty $, then the problem becomes a conflict between shirking and the conventional method, which corresponds to the principal-agent problem. If, on the other hand, the cost of implementing a conventional method is high, $c_1=\infty$, then the model becomes the principal-agent model with ambiguity (\nocite{LRS:2011}Lopomo, Rigotti, and Shannon(2011) and \nocite{wein:2010} Weinschenk(2010)). Furthermore, if the set of priors for the new method, $P_2$ is a singleton, then the problem reduces to Manso's (2011) principal-agent problem with two-armed bandit. Hence, comparing the difference in optimal contracts in this paper to other models by changing the set of priors $P_2$ will reflect the effects of ambiguity in optimal method that motivates innovation.
+
+In the following subsections, I derive the optimal contracts for implementing various action plans, and examine how these contracts differ from the traditional models with Bayesian learning.
+
+
+%%%%%%  Optimal Contract for Exploitation   %%%%%%%
+\subsection{Optimal Contract for Exploitation}
+
+Here I characterize the optimal contract that motivates agent to implement exploitation of conventional method. I then examine the effect of learning on uncertainty changes the characteristics of optimal incentives. Before we proceed, I will define the following expressions for the ease of exposition:
+\eq{
+& \alpha_1 = \frac{c_1}{p_1-p_0}, \hspace{.3in} 
+ \beta_1 = \frac{ E^L[p_2]- p_0 +  E^L[p_2](E^L[p_2 |S,2] - p_0) }{p_1-p_0 +  E^L[p_2](p_1-p_0) },		\notag \\
+ & \overline{\epsilon} = \overline{E[p_2]} - p_0 - \frac{c_2}{c_1} (p_1 -p_0) \notag . 
+}
+and let $(x)^+$ denote $\max\{x,0\}$.
+\vspace{.1in}
+\begin{proposition}
+\label{exploitation1}
+When ex-ante ambiguity is high and Knightian learning is associated with a reduction in ex-post ambiguity such that $\epsilon_1 > \overline{\epsilon}$ and $\epsilon_2=0$, the optimal contract that motivates exploitation of old method is such that
+%
+\eq{ 
+ w_F=w_{SF}&=w_{FF} =0 , \notag \\
+% \notag \\
+ w_{SS}&=w_{FS}=\alpha_1,  \notag \\
+ %\notag \\
+ w_S &= \alpha_1 + \frac{c_1(1+E^L[p_2])}{p_1-E^L[p_2]}  (\beta_1 -\frac{c_2}{c_1})^+.		\notag 
+}
+
+\end{proposition}
+
+The optimal contract for exploitation is loaded on short-term, rather than long-term, compensation. The second period wages, $w_{SS}$ and $w_{FS}$ equal $\alpha_1$, which reflects the compensation for foregoing shirking. Because the ex-ante ambiguity is high in this case, the principal does not need to compensate the agent for foregoing new method, which is viewed by the agent as being inferior to the old method. Hence, ex-ante ambiguity makes it cheaper to the principal for preventing exploration and learning. 
+
+On the other hand, the first period compensation, $w_S$, is equal to $\alpha_1$ plus some additional compensation. This second term reflects the additional compensation for foregoing the new method in the first period. The reason why this compensation for foregoing new method does not enter into the second wage but only into the first period is because of the benefits of learning in the first period. If the agent experiments with the new method in the first period, he benefits from a possibility of higher probability in the second period due to both Bayesian and Knightian learning. Thus, learning is potentially profitable to the agent. So to prevent the agent from learning, compensation need to be loaded more on the short-term.
+
+Note that the loading on the short-term compensation does not require any Bayesian learning by the agent, and that Knightian learning alone can generate such contract. Even when the agent does not receive any information that signals future success or a failure, the improvement in the quality of information alone can lead to this short-term heavy contract for exploitation. Thus, when Knightian learning reduces future ambiguity, a high compensation in the short-run may be necessary to prevent agent from working on tasks in which the agent may simply become more familiar with and gain experiences from. 
+
+On the other hand, when Knightian learning increases future ambiguity, such additional short-term compensation for preventing learning will not be necessary. 
+%\vspace{.1in}
+\begin{proposition}
+\label{exploitation2}
+When ex-ante ambiguity is low and Knightian learning is associated with an increase in ambiguity such that $\epsilon_1 <\overline{\epsilon}$ and $\epsilon_2 > \overline{E[p_2|S,2]} -\overline{E[p_2]}$, the optimal contract that motivates exploitation of old method is such that
+%
+\eq{ 
+ w_F=w_{SF}&=w_{FF} =0 , \notag \\
+% \notag \\
+ w_S = w_{SS}&=w_{FS}= \frac{c_1-c_2}{p_1-E^L[p_2]}.  \notag
+}
+
+\end{proposition}
+
+\begin{proof}
+See Appendix.
+\end{proof}
+
+With low ex-ante ambiguity, the IC constraint with respect to the new method is no longer non-binding in the second period. The principal now must compensate the agent for foregoing the new method, which reflected in the $\epsilon_1 <\overline{\epsilon}$ condition. Thus, low ex-ante ambiguity makes implmeneting leraning-prevention strategy more expensive, with $w_SS = w_FS = \frac{c_1-c_2}{p_1-E^L[p_2]} > \alpha_1$. 
+
+On the other hand, we no longer have a higher loading on short-term incentives, with $w_S = w_SS = w_SF$. Thus, the optimal contract here is a standard pay-for-performance incentives in both periods. When Knightian learning increases future ambiguity, learning is no longer attractive to the agent as it does not benefit him in the second period. In fact, when learning generates sufficiently more ambiguity, then it may even be harmful to the agent. Thus, the principal no longer has to provide compensation for foregoing learning in the first period. This hold true even when the agent can gain from Bayesian learning. When the positive signal generated from learning is offset by the increased in uncertainty due to the poor quality of the signal, then learning can generate a net negative gain for the agent. 
+
+In sum, when learning reduces future ambiguity, preventing learning necessitates a contract that pays the agent more in the short-run, and it makes it more costly for the principal, even when there is an absence of Bayesian learning. When learning increases future ambiguity, then the optimal contract for preventing learning pays a standard pay-for-performance incentives that is equal in both short-term and long-term incentives, even in the presence of positive Bayesian learning. How learning process affets future uncertainty, therefore, can lead to optimal incentives that are in contrasts to the ones derived under Bayesian learning alone. 
+
+
+%%%%%%  Optimal Contract for Innovation in a Two Period Model %%%%%%%
+\subsection{Optimal Contract for Learning Under Ambiguity}
+
+The same set of intutions from the optimal contract for implementing exploitation will drive the optimal contract for promoting learning. Again, I will derive the optimal contract under two different assumptions on Knightian learning, and compare and contrasts the two contracts. 
+
+\vspace{.1in}
+\begin{proposition}
+\label{exploration}
+When ex-ante ambiguity is high and Knightian learning is associated with a reduction in ex-post ambiguity such that $\epsilon_1 > \overline{\epsilon}$ and $\epsilon_2=0$, the optimal contract that motivates exploration of the innovative method is such that
+\eq{
+&w_F=w_{FF}=w_{SF} = 0, \notag \\
+\notag \\
+&w_{FS} =  \alpha_1 \notag \\
+\notag \\
+&w_{SS} =  \frac{c_2}{E^L[p_2|S,2]-p_0} +\beta_1 (w^{111}_S -\frac{\alpha_2}{E^L[p_2]-p_0} )^+ \notag \\
+\notag \\
+&w_S=  \frac{\alpha_2}{E^L[p_2]-p_0} + (w^{111}_S -\frac{\alpha_2}{E^L[p_2]-p_0} )^+ \notag 
+}
+
+where,
+\eq{
+&\alpha_2= c_2 - E^L[p_2](c_1-c_2) +p_0 c_1 + p_1 (E^L[p_2]-p_0) \alpha_1  \notag \\
+& \hspace{.2in} - \frac{E^L[p_2]E^L[p_2|S,2]-p_0^2}{E^L[p_2|S,2]-p_0}  \notag  \\
+\notag \\
+&w^{111}_{S} = \frac{c_1 +p_0c_1 p_1 c_1 - (p_1 p_1 - p_0 p_0) \frac{c_1}{p_1-p_0} }{p_1-p_0}. \notag
+}
+
+\end{proposition}
+\vspace{.1in}
+
+The first thing to note is that the agent maximizes his utility based on the lowest expected prior, $E^L[p_2]$ and $E^L[p_2 |S, 2]$, which greatly simplifies the incentive constrains in the principal's problem. This result comes from the fact that in any given period, the reward for success must be greater than the reward for failure. To see this, the $IC \la 2^0_1 \ra$ is given by $(p_1-p_0) (w_{FS} - w_{FF}) \ge c_1$. Since both $(p_1 - p_0)$ and $c_1$ is positive, it must be that $w_{FS} - w_{FF}$ must also be strictly positive. Since a reward for success is greater than the reward for failure, the prior that minimizes the agent's utility in the second period will be the lowest prior for the expected probability of success, $E^L[p_2 |S, 2]$. Similar argument can be made to show that the agent maximizes utility based on $E^L[p_2 |S, F]$ and $E^L[p_2]$. 
+
+The principal's goal is to incentivize the agent to take exploration over exploitation or shirking in both periods. First, the compensation for failures in both period, $w_{FF}$ is zero since it would only incentivize shirking. Likewise, the reward for second period success given a first period failure is equal to $alpha_1 = \frac{c_1}{p_1-p_0}$, which is equal to the standard pay for performance that compensates the agent for the cost of effort. This term reflects the fact that once a failure is observed in the first period, the principal wishes to revert back to working on the conventional method, which can be incentivized through the standard incentive scheme. 
+
+In the absence of ambiguity, the reward after a first period success would not be optimal for couple of reasons. First, compensating for success in the first period incentivizes a conventional method, since the expected probability of success for innovation, $E[p_2]$ is lower than that of the conventional method, $p_1$. Secondly, it is cheaper for the agent to delay the compensation for success into second period since two consecutive successes is a stronger signal of innovative effort than the first period success alone. Thus, an optimal contract for innovation without ambiguity incentivizes the agent through long-term rewards.
+
+In the presence of ambiguity, however, the delayed compensation principle does not hold, and the optimal incentives for innovation end up paying the agent for the first period success, $w_S>0$. The rationale for the early compensation is that the agent discounts the value of future innovation more than the principal due to the agent's aversion to ambiguity, i.e., $E^L[p_2|S,2] < \overline{E}[p_2|S,2]$. Therefore, delaying compensation creates an additional cost to the principal, and thus, it becomes cheaper for the principal to reward for short-term success and forgo the additional information provided in the second period.
+%Note: show this mathematically. Also, then wouldn't I have to compare the size of the benefit of delaying compensation to gain new information compared to the additional cost created by this ambiguity aversion? Or is it because in my case, I assumed an extreme form of ambiguity aversion, which wipes out any informative signal. 
+
+The compensation for success in the first period, however, is limited by the the existence of a conventional method. Because the expected probability of success for the conventional method in the first period is higher than that of the innovative method, i.e., $p_1 > E^L[p_2]$, the compensation for the first period success has an upper bound at $w^{111}_S$, at which point the delayed compensation becomes once again optimal to motivate exploration. The upper bound on the reward for success in the first period parallels the $IC \la 2^1_1 \ra$ constraint, which puts an upper bound limit on the reward for second period success. In both periods, the presence of a conventional method works against the agent's incentive to explore innovative methods. The ambiguity, therefore, makes the optimal contract more steady over time. The low variability of incentives over two periods is markedly different from the characterization of long-term incentive structure in models without ambiguity. Therefore, innovations with high degrees of ambiguity can be better motivated by a moderate compensation with low (but not zero) sensitivity to performance. 
+
+Combined with the existing model of innovation, my model predicts that the variability of managerial compensation is correlated with the type of innovation take on by the firm. A highly radical innovation with little amount of history, which is likely to be correlated with a high degree of ambiguity, predicts a low volatility in incentive compensation with more steady payoffs in the intermediate successes while a traditional type of innovation should be positively correlated with a high variability of pay that loads heavily on the long-term compensation with little or no compensation in the intermediate periods.
+
+\subsection{Numerical Example}
+I now demonstrate the effects of ambiguity on optional contract for innovation through a numerical example. Let the baseline parameters be $p_0=0.1, p_1=0.5, \overline{E}[p_2]=0.45, E^L[p_2]=0.3, E^H[p_2]=0.55, \overline{E}[p_2|S,2]=0.7, E^L[p_2|S,2]=0.45, c_1=1.5$, and $c_2=1$. WIth zero ambiguity, the optimal contract that motivates innovation  will be the result from Manso(2011), which is the following:
+
+\eq{
+&w_S = 0  &w_F=0 \notag \\
+&w_{SS} = 5.5  &w_{SF}=0 \notag \\
+&w_{FS} = 3.8 &w_{FF}=0 \notag 
+}
+
+Notice that the reward for success in the first period is zero, and the reward for consecutive success in the last period is positive. Typical incentives for innovation rewards the agent through delayed compensation. By incentivizing the agent for the long-term and not punishing the agent for short-term failures, the agent can be focused on long-term goals, which increases the likelihood of taking on innovation. 
+
+I now derive the optimal contract for innovation in the presence of ambiguity as outlined in the baseline parameters, with $\epsilon=0.15$. From Proposition \ref{exploration}, the optimal contract that motivates innovation is       
+
+\eq{
+&w_S = 1.8  &w_F=0 \notag \\
+&w_{SS} = 3.8  &w_{SF}=0 \notag \\
+&w_{FS} = 3.8 &w_{FF}=0 \notag 
+}
+
+In the presence of ambiguity, rewarding the agent in every period is optimal. This is because of two reasons. First, the agent's ambiguity makes long-term rewards less attractive, and thus, it is cheaper for the principal, who does not suffer from ambiguity, to give rewards in earlier periods. Secondly, the principal cannot load all rewards in one period because excessive rewards in any period makes the traditional method more attractive. Incentive compatibility constraint due to ambiguity implies that there is a limitation to how much gap there could be between the reward for success and a reward for failure. 
+
+Therefore, an optional contract that incentivizes innovation under ambiguity is characterized by steady (low volatility) reward for success. 
+
+ 
+
+%%%%%%		Conclusion 		%%%%%%%
+
+\section{Conclusion}
+
+[Insert Conclusion Here]
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% 		Reference
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\nocite{*}
+
+\bibliographystyle{jf} % need usepackage{harvard}
+\bibliography{references}
+%\printbibliography
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% 		Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\appendix
+\singlespace
+\setlength{\parindent}{0pt}
+%\setlength{\parskip}{1pt} 
+
+
+\section*{Appendix}
+
+%%%%%%%%% Proof of Proposition 1 %%%%%%%%%%
+\section{Proof of Proposition \ref{exploitation}}
+The incentive compatibility constraint under exploitation, IC$(\la i^j_k \ra)$, becomes
+\be
+ W_a(\vec{w}^*, <1^1_1>)  - C(<1^1_1>) \ge W_a(\vec{w}^*, \la i^j_k \ra)  - C(\la i^j_k \ra)  	\notag
+\ee
+
+Re-arranging the terms, we get
+\eq{
+\text{IC$(\la i^j_k \ra):$} \hspace{.3in} &(p_1- \widetilde{E}[p_i])(V_S(\vec{w},<1^1_1>)-V_F(\vec{w},<1^1_1>))  \notag \\
+&+  \widetilde{E}[p_i] (p_1- \widetilde{E}[p_j | S,i]) (w_{SS}-w_{SF} ) \notag \\
+&+ (1- \widetilde{E}[p_i]) (p_1- \widetilde{E}[p_k | F,i]) (w_{FS}-w_{FF} )  \notag \\
+& \ge (c_1+p_1c_1+(1-p_1)c_1) - (c_i + \widetilde{E}[p_i]c_j + (1-\widetilde{E}[p_i])c_k)  \notag
+}
+where,
+\eq{
+V_S(\vec{w},<1^1_1>)= w_S + p_1 w_{SS} + (1-p_1) w_{SF} \text{  , and} \notag \\
+V_F(\vec{w},<1^1_1>)= w_F + p_1 w_{FS} + (1-p_1) w_{FF}  \notag
+}
+
+First, assume (by contradiction) that $w_{FF} > 0$ or $w_F > 0.$ Then consider the alternative contract $\vec{w}'$ such that $w_{FF}'=0$ and $w_{F}'=0$. The principal's expected wage paid to the agent under the alternative contract is less than that of the original contract, i.e.,   $W(\vec{w}^*, <1^1_1>) >  W(\vec{w}', <1^1_1>).$ But it satisfies the IC$(\la i^j_k \ra)$ since $w_{FF}$ and $w_{F}$ enters the constraints as negative terms, which is a contradiction. Hence,
+\[ w_{FF}=w_F=0. \]
+
+Secondly, assume (by contradiction) that $w_{SF} >0$.  Then, let $\vec{w}'$ be such that $w_{SF}'=0, w_{SS}'=w_{SS}-w_{SF},$ and $w_S'=w_S+w_{SF}.$ This basically transfers the payment from the second period in the case of first period success to the first period payment. Then, by design, we have  $W(\vec{w}^*, <1^1_1>) =  W(\vec{w}', <1^1_1>),$ while the  IC$(\la i^j_k \ra)$  are still satisfied. Then,  $\vec{w}'$ is a better contract  since it pays the agent sooner, a contradiction. Hence,
+\[w_{SF}=0.\]
+
+By plugging in for $w_{FF}, w_F$, and $w_{SF}$ into the IC constraints we can simplify the constraints and see that many of the constraints are redundant. Multiplying IC$<1^1_0>$ by $(1-\widetilde{E}[p_i])$ on both sides, combined with IC$\left <i^j_1 \right >$ results in IC$\left <i^j_0 \right > $ for all $(i,j) \ne (1,1)$. Likewise, multiplying $\widetilde{E}[p_i]$ to IC$<1^0_1>$, and combining with IC$<i^1_k>$ yields IC$<i^0_k>$,  for all $(i,j) \ne (1,1)$. Similarly, using all the other IC constraints along with the condition that $c_2/c_1 \ge \frac{\widetilde{E}[p_2]-p_0}{p_1-p_0}$, we can show that IC$\la i^j_k \ra$  with $i=2$, $j=2$ {\emph , or} $k=2$, but excluding $\la 2^2_1\ra$ is redundant.
+
+Therefore, the non-redundant IC constraints are the following:
+\eq{
+\text{IC$(<1^0_1>):$} \hspace{.5in}  & (p_1-p_0)w_{SS} \ge c_1 \notag \\
+\notag \\
+\text{IC$(<1^1_0>):$} \hspace{.5in}  & (p_1-p_0)w_{FS} \ge c_1 \notag \\
+\notag \\
+\text{IC$(<0^1_1>):$} \hspace{.5in}  & (p_1-p_0)w_{S}+(p_1^2-p_0 p_1)w_{SS}-(p_1^2-p_0p_1)w_{FS}   \ge c_1 \notag \\
+\notag \\
+\text{IC$(\la 2^2_1\ra):$} \hspace{.5in}  & (p_1-\widetilde{E}[p_2])w_S + (p_1^2- \widetilde{E}[p_2] \widetilde{E}[p_2|S,2])w_{SS} \notag \\
+& - (p_1^2 - \widetilde{E}[p_2] p_1) w_{FS} \ge c_1-c_2 + \widetilde{E}[p_2] (c_1-c_2)	\notag
+}
+
+The first two constraints are binding: Assume (by contradiction) that they are not binding, i.e., $w_{SS}>0 or w_{FS}>0$. ...
+Therefore, we have
+\[ w_{SS} = w_{FS} = \frac{c_1}{p_1-p_0} = \alpha_1. \]
+
+Substituting in the $w_{SS}$,  and $w_{FS}$ into the last two constraints, we get
+\eq{
+\text{IC$(<0^1_1>):$} \hspace{.5in}  & (p_1-p_0) w_{S}   \ge c_1 \notag \\
+\notag \\
+\text{IC$(\la 2^2_1\ra):$} \hspace{.5in}  & (p_1-\widetilde{E}[p_2])w_S -\widetilde{E}[p_2] (\widetilde{E}[p_2|S,2]-p_1) \frac{c_1}{p_1-p_0}		\notag \\
+& \ge c_1-c_2 + \widetilde{E}[p_2] (c_1-c_2)	\notag
+}
+We can compare the two inequalities and see that IC$\la 2^2_1\ra$ is binding when $\frac{c_2}{ c_1} \le  \beta_1$, and, otherwise, IC$<0^1_1>$ is binding. This gives our optimal contract. 
+
+
+
+
+
+%%%%%%%%%	Proof of Proposition for Exploration	%%%%%%%%%%
+\newpage
+\section{Proof of Proposition \ref{exploration}}
+The incentive compatibility constraint for implementing $\la 2^2_1\ra$ is
+\eq{
+ W_a(\vec{w}^*, \la 2^2_1\ra)  - C(\la 2^2_1\ra) & \ge W_a(\vec{w}^*, \la i^j_k \ra)  - C(\la i^j_k \ra) \notag \\
+ \forall i,j,k \in I. \notag
+}
+
+The IC constraint can be re-expressed as the following:
+
+\eq{
+\text{IC$(\la i^j_k \ra):$} \hspace{.3in} &(\widetilde{E}[p_2]- \widetilde{E}[p_i])(V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra))  \notag \\
+&+  \widetilde{E}[p_i] ( \widetilde{\widetilde{E}}[p_2 | S,2]- \widetilde{\widetilde{E}}[p_j | S,i]) (w_{SS}-w_{SF} ) \notag \\
+&+ (1- \widetilde{E}[p_i]) (p_1- \widetilde{\widetilde{E}}[p_k | F,i]) (w_{FS}-w_{FF} )  \notag \\
+& \ge (c_2+\widetilde{E}[p_2] c_1+(1-\widetilde{E}[p_2]) c_1) - (c_i + \widetilde{E}[p_i]c_j + (1-\widetilde{E}[p_i])c_k),  \notag
+}
+\eq{
+& V_S(\vec{w},\la 2^2_1\ra)= w_S + \widetilde{\widetilde{E}}[p_2|S,2] w_{SS} + (1-\widetilde{\widetilde{E}}[p_2|S,2]) w_{SF} , \notag \\
+& V_F(\vec{w},\la 2^2_1\ra)= w_F + p_1w_{FS} + (1-p_1) w_{FF}  \notag.
+}
+
+First, I show that the reward for success in the second period must be greater than or equal to the reward for failure, i.e., $w_{SS} \ge w_{SF}$, and $w_{FS} \ge w_{FF}$. This falls immediately from $IC\la 2^0_1 \ra$ and $IC \la 2^2_0 \ra $, respectively.
+
+$IC \la 2^0_1 \ra: \hspace{.5in}  (p_1 - p_0)(w_{FS}-w_{FF}) \ge c_1.$
+
+Since $(p_1-p_0)$ and $c_1$ is positive, the $(w_{FS}-w_{FF})$ term must also be positive for the constraint to be satisfied. Similarly, under $IC<2^2_0>$, $(w_{SS}-w_{SF})$ term must also be positive. 
+
+Then, the solution to the minimization problem inside the agent's ambiguity-averse utility function follows from the two properties. Since the reward for success is greater than the reward for failure, the ambiguity-averse agent will act as if the probability of success is low. 
+
+\[ E^L[p_2]=\widetilde{\widetilde{E}}[p_2] = {\arg\min}_{E[p_2] \in D_2} E[p_2] w_{FS} + (1-E[p_2]) w_{FF} -c_2, \]
+\eq{E^L[p_2|S,2] &=\widetilde{\widetilde{E}}[p_2|S,2] \notag \\
+&= {\arg\min}_{E[p_2|S,2] \in D_{2|S,2}} E[p_2|S,2] w_{SS} + (1-E[p_2|S,2] ) w_{SF} -c_2 . \notag \\
+E^L[p_2|F,2] &=\widetilde{\widetilde{E}}[p_2|F,2] \notag \\
+&= {\arg\min}_{E[p_2|F,2] \in D_{2|F,2}} E[p_2|F,2] w_{FS} + (1-E[p_2|F,2] ) w_{FF} -c_2 . \notag \\
+}
+
+%%% w_F = 0 %%%%%%
+%Then, we have $w_F=0$. Suppose $w_F>0$. Then let $w_F'=0$ and $w_{FS}' =w_{FS} + \frac{w_F}{p_1} - \epsilon$. Then there exists $\epsilon >0$ such that %$W(\vec{w}, \la i^j_k \ra) > W(\vec{w}', \la i^j_k \ra)$ and all the IC's are satisfied since $(p_1 - E^L[p_k |F,i])(w_FS -w_FF) > 0$. 
+
+Now, I show that some of the constraints are redundant. 
+
+The $IC \la 2^2_0 \ra$ and $IC \la i^j_1\ra $ will lead to $IC \la i^j_0 \ra$. First, multiplying  $IC \la 2^2_0 \ra$ on both sides by $(1-  \widetilde{E}[p_i] )$, we get $ (1-  \widetilde{E}[p_i] ) (p_1 - p_0) (w_{FS} - w_{FF}) \ge  (1-  \widetilde{E}[p_i] ) c_1$ . Now, combining this inequality with $IC \la i^j_1\ra$ results in $IC \la i^j_0 \ra $. 
+
+$IC\la i^j_2\ra $ can be obtained from $IC \la i^j_1 \ra$, $IC \la 2^2_0 \ra$ ,  and the assumption $c_2 \ge \frac{ \wtE[p_2] - p_0}{p_1 - p_0} c_1$: From $IC \la i^j_1 \ra$, we have $(w_{FS}-w_{FF}) \ge \frac{c_1}{p_1-p_0}$. Multiplying $(p_1-E^L[p_2|F,i])$ on both sides, we have $(p_1 - E^L[p_2 | F,i]) (w_{FS} - w_{FF}) \ge (p_1 - E^L[p_2 | F,i]) \frac{c_1}{p_1-p_0}$. But
+\eq{   (p_1 - E^L[p_2 | F,i]) \frac{c_1}{p_1-p_0} &= (p_1-p_0 +p_0-E^L[p_2 | F,i])  \frac{c_1}{p_1-p_0}   \notag \\
+&= c_1 + \frac{p_0 - E^L[p_2 | F,i]}{p_1 -p_0} c_1 \notag \\
+& \ge  c_1 + \frac{p_0 - E^L[p_2]}{p_1 -p_0} c_1 =  c_1 - \frac{E^L[p_2]-p_0}{p_1 -p_0} c_1 \notag \\
+&\ge c_1 - c_2 \notag }
+where the last inequality comes from the assumption that $c_2 \ge \frac{E^L[p_2]-p_0}{p_1 -p_0} c_1 $. Now, multiplying the last inequality by $(1-\widetilde{E}[p_i])$, and then combining it with $IC\la i^j_1 \ra$, we obtain $\la i^j_2 \ra$. 
+
+Therefore, the non-redundant IC's so far are $IC \la 2^2_0 \ra, IC \la 1^j_1 \ra, IC \la 0^j_1 \ra, IC \la 2^1_1 \ra, IC \la 2^0_1 \ra$. 
+
+%%%%%% w_FF =0 %%%%%%%
+Now, it becomes evident that $w_{FF}=0$. Suppose that the optional contract $\vec{w}$ is composed of $w_{FF}>0$. Then, let $\vec{w}'$ be a contract with $w_{FF}=0$ and $w_{F}'=w_F + (1-p_1)w_{FF}$. Then, $V_F(\vec{w},\la 2^2_1\ra)= V_F(\vec{w}',\la 2^2_1\ra), W_p(\vec{w}, \la 2^2_1\ra) = W_p(\vec{w}', \la 2^2_1\ra)$, and it also satisfy all the IC constraints. But because it pays the agent earlier, $\vec{w}'$ is a superior contract, which is a contradiction.
+
+
+Next, I show that the $IC \la 2^2_0 \ra$ is binding, and therefore, $w_{FS} = \frac{c_1}{p_1-p_0}$.
+
+Without $IC \la 1^j_1 \ra, IC \la 0^j_1 \ra$, we are back to the case of the single-period problem, where $IC \la 2^1_1 \ra$ and $IC \la 2^0_1 \ra$ implies that $(w_{SS}-w_{SF})$ has an upper and a lower boundary, i.e., $\frac{c_2}{E^L[p_2|S,2]-p_0} \le w_{SS}-w_{SF} \le \frac{c_1-c_2}{p_1 0 E^L[p_2|S,2]}$. So with the additional constraints in the two-period problem, the term $w_{SS} - w_{SF}$ must lie somewhere in between the boundaries of the one-period problem. Likewise, we must have that $c_1>c_2$; otherwise, the upper boundary will be negative, and the optimal contract does not exist. But the constraint on $c_1$ and $c_2$ is even stricter than just $c_1>c_2$. From $\frac{c_2}{E^L[p_2|S,2]-p_0} \le w_{SS}-w_{SF} \le \frac{c_1-c_2}{p_1 0 E^L[p_2|S,2]}$, it must be that  $ \frac{c_1-c_2}{p_1 - E^L[p_2|S,2]} \ge \frac{c_2}{E^L[p_2|S,2]-p_0}$; otherwise, the solution does not exist. But we also have an additional assumption as stated at the beginning, which is that $c_2 \ge \frac{E^L[p_2]-p_0}{p_1 -p_0} c_1 $. Combining the two inequalities, $c_1$ must satisfy the following condition:
+
+\eq{ 
+\frac{p_1-p_0}{\wtE[p_2]-p_0}c_2 &\ge \; c_1 \; \ge   \frac{p_1-p_0}{E^L[p_2|S,2]-p_0} c_2 \notag \\
+ &\Leftrightarrow \notag \\
+\frac{p_1 -p_0}{E^L[p_2]-p_0}  &\ge  \frac{c_1}{c_2} \ge 1+ \frac{p_1 -E^L[p_2|S,2]}{E^L[p_2|S,2] - p_0} . \notag 
+}
+Some note in the above inequality: The first inequality from the first two terms on the left comes from our initial assumption that the cost of employing new method compared to the cost of employing old method is not too low such that the agent always prefers to innovate (which makes it impossible to incentives the agent to take old method when needed).  The second inequality on the right comes from the IC constraint and it says that the cost of employing the new method must be lower than the cost of employing the old method since it's greater than one 1, and it guarantees that the cost of implementing the new method is not too prohibitively high such that the agent never innovates. 
+
+Next, I show that $V_S(\vec{w},\la 2^2_1\ra) \ge V_F(\vec{w},\la 2^2_1\ra)$. From  $IC \la 0^1_0 \ra$, we have
+\eq{ (& \wtE[p_2]-p_0)(V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra)) \notag \\
+ &+ p_0(E^L[p_2|S,2] -p_1)(W_{SS}-w_{SF}) \ge c_2 +\wtE[p_2](c_2-c_1). \notag
+}
+Using $(w_{SS}-w_{SF}) \le \frac{c_1-c_2}{p_1 - E^L[p_2 | S,2]}$, we have
+\eq{ (& \wtE[p_2]-p_0)(V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra)) + p_0(c_2-c_1) \ge c_2 +\wtE[p_2](c_2-c_1), \notag \\
+ &(\wtE[p_2]-p_0)(V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra)) \ge c_2 -(\wtE[p_2]-p_0)(c_1-c_2) \notag
+}
+Then using $\frac{p_1-p_0}{\wtE[p_2]-p_0}c_2 \ge c_1$, we get
+\eq{
+... \ge c_2+ (\wtE[p_2]-p_0)(1-\frac{p_1-p_0}{E[p_2]-p_0})c_2&= c_2 + (\wtE[p_2]-p_1)c_2\notag \\
+&= c_2 -p_1c_2 =(1-p_1)c_2 \ge 0. \notag \\
+\Leftrightarrow (\wtE[p_2]-p_0)(V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra))  \ge 0. \notag
+}
+Since $(\wtE[p_2]-p_0) \ge 0$, it must be that $V_S(\vec{w},\la 2^2_1\ra)-V_F(\vec{w},\la 2^2_1\ra)) \ge 0.$
+
+
+With $V_S(\vec{w},\la 2^2_1\ra) \ge V_F(\vec{w},\la 2^2_1\ra))$, and with the knowledge that $c_1 > c_2$, it follows that $E^L[p_2]=\wtE[p_2]= {\arg\min}_{E[p_2] \in D_2} W(\vec{w},\la 2^2_1 \ra)$.
+
+The non-redundant IC's can then be re-written as:
+
+\eq{
+IC\la2^2_0\ra: \hspace{.5in} &w_{FS}=\frac{c_1}{p_1-p_0} \notag 
+\\
+\notag 
+\\
+IC\la1^j_1\ra: \hspace{.5in} &(E^L[p_2] -p_1)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF}-w_F-p_1w_{FS}) \notag \\
+&+p_1(E^L[p_2|S,2]-E^L[p_j])(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(c_1+p_1c_j+(1-p_1)c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_1)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_1 E^L[p_j] )( w_{SS} -w_{SF} ) \notag \\
+& +(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - (c_1 + p_1 c_j + (1-p_1) c_1 ) \notag 
+\\
+\notag 
+\\
+IC\la0^j_1\ra: \hspace{.5in} &(E^L[p_2] -p_0)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF} -w_F-p_1w_{FS}) \notag \\
+&+p_0(E^L[p_2|S,2]-E^L[p_j])(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(p_0c_j+(1-p_0)c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_0)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_0 E^L[p_j] ) (w_{SS} -w_{SF}) \notag \\
+& + (E^L[p_2] - p_0 ) w_{SF} - p_1 (E^L[p_2] - p_0) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - ( p_0 c_j + (1-p_0) c_1 ) \notag 
+\\
+\notag 
+\\
+IC\la2^1_1\ra: \hspace{.5in} & (E^L[p_2|S,2]-p_1)(w_{SS}-w_{SF}) \ge c_2-c_1 \notag 
+\\
+\notag 
+\\
+IC\la2^0_1\ra: \hspace{.5in} & (E^L[p_2|S,2]-p_0)(w_{SS}-w_{SF}) \ge c_2. \notag 
+}
+
+The $IC\la 1^j_1 \ra$ contains three constraints:
+\eq{
+IC\la1^0_1\ra: \hspace{.5in} &(E^L[p_2] -p_1)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF}-w_F-p_1w_{FS}) \notag \\
+&+p_1(E^L[p_2|S,2]-p_0 )(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(c_1+(1-p_1)c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_1)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_1 p_0 )( w_{SS} -w_{SF} ) \notag \\
+& +(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS}  \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - (c_1 + (1-p_1) c_1 ) \notag \\
+\notag 
+\\
+IC\la1^1_1\ra:\hspace{.5in} &(E^L[p_2] -p_1)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF}-w_F-p_1w_{FS}) \notag \\
+&+p_1(E^L[p_2|S,2]-p_1)(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(2 c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_1)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_1 p_1 )( w_{SS} -w_{SF} ) \notag \\
+& +(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS}    \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - (2 c_1  ) \notag \\
+\notag 
+\\
+IC\la1^2_1\ra: \hspace{.5in} &(E^L[p_2] -p_1)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF}-w_F-p_1w_{FS}) \notag \\
+&+p_1(E^L[p_2|S,2]-E^L[p_2])(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(c_1+p_1c_2+(1-p_1)c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\ 
+& (E^L[p_2]-p_1)(w_S-w_F) + E^L[p_2]( E^L[p_2 | S,2] - p_1 )( w_{SS} -w_{SF} ) \notag \\
+& +(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - (c_1 + p_1 c_2 +(1-p_1) c_1 ) \notag
+}
+
+Likewise, the $IC\la 0^j_1 \ra$ contains three constraints:
+\eq{
+IC\la0^0_1\ra: \hspace{.5in} &(E^L[p_2] -p_0)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF} -w_F-p_1w_{FS}) \notag \\
+&+p_0(E^L[p_2|S,2]-p_0 )(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(1-p_0)c_1 \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\ 
+& (E^L[p_2]-p_0)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_0 p_0 ) (w_{SS} -w_{SF}) \notag \\
+& + (E^L[p_2] - p_0 ) w_{SF} - p_1 (E^L[p_2] - p_0) w_{FS}\notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - (1-p_0) c_1 \notag \\
+\notag 
+\\
+IC\la0^1_1\ra: \hspace{.5in}  &(E^L[p_2] -p_0)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF} -w_F-p_1w_{FS}) \notag \\
+&+p_0(E^L[p_2|S,2]-p_1 )(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-c_1 \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_0)(w_S-w_F) + (E^L[p_2] E^L[p_2 | S,2] - p_0 p_1 ) (w_{SS} -w_{SF}) \notag \\
+& + (E^L[p_2] - p_0 ) w_{SF} - p_1 (E^L[p_2] - p_0) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - c_1 \notag \\
+\notag 
+\\
+IC\la0^2_1\ra: \hspace{.5in}  &(E^L[p_2] -p_0)(w_S+E^L[p_2|S,2]w_{SS}+(1-E^L[p_2|S,2])w_{SF} -w_F-p_1w_{FS}) \notag \\
+&+p_0(E^L[p_2|S,2]-E^L[p_2])(w_{SS}-w_{SF})  \notag \\
+& \ge c_2+E^L[p_2]c_2+(1-E^L[p_2])c_1-(p_0c_2+(1-p_0)c_1) \notag \\
+& \hspace{.3in} \Leftrightarrow \notag \\
+& (E^L[p_2]-p_0)(w_S-w_F) + E^L[p_2] (E^L[p_2 | S,2] - p_0) (w_{SS} -w_{SF}) \notag \\
+& + (E^L[p_2] - p_0 ) w_{SF} - p_1 (E^L[p_2] - p_0) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1- ( p_0 c_2 + (1-p_0) c_1 )\notag 
+}
+
+\begin{proposition*}
+
+$IC \la 1^2_1 \ra$ is implied by $IC \la 1^1_1 \ra$ and $IC \la 2^1_1 \ra$.  
+
+\end{proposition*}
+
+\begin{proof}
+
+Add $p_1(w_{SS}-w{SF})(p_1-E[p_2])$ to both sides of $IC \la 1^1_1 \ra$.
+We have 
+\eq{
+&(E^L[p_2]-p_1)(w_S-w_F) + E^L[p_2]( E^L[p_2 | S,2] - p_1 )( w_{SS} -w_{SF} ) \notag \\
+&+(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS} \notag \\
+&\hspace{.3in}  \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 -  c_1 -(1-p_1)*c_1 -p_1*c_1  \notag \\
+&\hspace{.6in}  +p_1(w_{SS}-w_{SF})(p_1-E[p_2]) \notag 
+}
+
+Using $IC \la 2^1_1 \ra$, we get
+\eq{
+\text{LHS of $IC \la 1^2_1 \ra$} \hspace{.3in}  &\ge ... - p_1 c_1 + p_1\frac{c_2-c_1}{E^L[p_2|S,2]-p_1} (p_1-E^L[p_2]) 	\notag \\
+&\ge ... -p_1 c_1  + p_1\frac{c_2-c_1}{E^L[p_2|S,2]-p_1} (p_1-E^L[p_2|S,2]) \notag \\
+& \ge ... -p_1 c_1 + p_1 (c_1 - c_2) = ... -p_1c_1 +p_1 c_1 - p_1 c_2 \notag \\
+& \ge ... - p_1 c_2 \hspace{.3in} \text{, the RHS of $IC \la 1^2_1 \ra$.}  \notag \hspace{.5in} \square
+}
+
+\end{proof}
+
+
+\begin{proposition*}
+
+$IC \la 1^0_1 \ra$ is implied by $IC \la 1^1_1 \ra$ and $IC \la 2^1_1 \ra$.  
+
+\end{proposition*}
+
+\begin{proof}
+
+Add $p_1(w_{SS}-w{SF})(p_1-p_0)$ to both sides of $IC \la 1^1_1 \ra$.
+We have 
+\eq{
+&(E^L[p_2]-p_1)(w_S-w_F) + ( E^L[p_2 | S,2] E^L[p_2] - p_1p_0 )( w_{SS} -w_{SF} ) \notag \\
+&+(E^L[p_2]-p_1) w_{SF} + p_1 (p_1-E^L[p_2]) w_{FS} \notag \\
+&\hspace{.3in}  \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 -  c_1 -(1-p_1)*c_1 -p_1*c_1  \notag \\
+&\hspace{.6in}  +p_1(w_{SS}-w_{SF})(p_1-p_0) \notag 
+}
+
+Using $IC \la 2^1_1 \ra$, we get
+\eq{
+\text{LHS of $IC \la 1^0_1 \ra$} \hspace{.3in}  &\ge ... - p_1 c_1 + p_1\frac{c_2-c_1}{E^L[p_2|S,2]-p_1} (p_1-p_0) 	\notag \\
+&\ge ... -p_1 c_1  + p_1\frac{c_2-c_1}{E^L[p_2|S,2]-p_0} (p_1-p_0) \notag \\
+& \ge ... -p_1 c_1 + p_1 (c_2 - c_1) = ... -p_1c_1 +p_1 c_2 - p_1 c_1 \notag \\
+& \ge ... + p_1 c_2 \notag \\
+& \ge ... + 0 \hspace{.3in} \text{, the RHS of $IC \la 1^0_1 \ra$. }  \notag \hspace{.5in} \square
+}
+
+\end{proof}
+
+%%%%%%%%         w_FS=0     %%%%%%%%%%%%%%
+We also have that $w_{SF}=0.$
+\begin{proposition*} 
+$w_{FS} = 0.$
+\end{proposition*}
+
+\begin{proof}
+Suppose the optional contract contains $w_{SF}>0$.
+Then consider a new contract $\vec{w}'$ such that $w_{SF}'=w_{SF} - \epsilon$, where $\epsilon>0$,  $w_{SS}'=w_{SS}-\epsilon$, and $w_S' = w_S +\epsilon$. 
+Then we have $w_{SS}' - w_{SF}' = w_{SS} - \epsilon - (w_{SF} - \epsilon) = w_{SS} - w_{SF}$. Also, we have $V_S(\vec{w}',\la 2^2_1\ra) -V_F(\vec{w}',\la 2^2_1\ra) = w_S + \epsilon + E^L(p_2|S,2) (w_{SS}-\epsilon) + (1-E^L[p_2 |S,2]) (w_{SF} - \epsilon) - w_F -p_1 w_{FS}  =  V_S(\vec{w},\la 2^2_1\ra) -V_F(\vec{w},\la 2^2_1\ra)$. Therefore, all the IC constraints are satisfied. At the same time, the expected wage cost to the principal remains the same. Since the new contract $\vec{w}'$ pays the agent earlier, so it's a better contract, which is a contradiction. \hspace{.5in} $\square$
+
+\end{proof}
+
+
+Now, I examine the conditions under which $IC \la 1^1_1 \ra $ is binding or non-binding.
+
+First, I will derive the optimal contract under the assumption that  $IC \la 1^1_1 \ra$ is non-binding.
+
+\begin{proposition*}
+If $IC \la 1^1_1 \ra$ is not binding, then $w_F$ must equal to zero.
+\end{proposition*}
+
+\begin{proof}
+Suppose that the optimal contract contains $w_F>0$ and that $IC \la 1^1_1 \ra$ is not  . 
+Then $\exists \; \epsilon>0$ such that $w_F' = w_F - \epsilon$ and all IC's are satisfied. First, since  $IC \la 1^1_1 \ra$ is not binding, we can find a very small $\epsilon$ that 
+satisfies the constraint. Now, with other constraints, $IC \la 0^i_1\ra, \la 2^1_1 \ra, \la 2^0_1\ra$, reducing $w_F$ will continue to satisfy the constraint or that $w_F$ does not enter into the constraints. Therefore, all constraints are satisfied with $w_F'=0$. But the new contract with the term $w_F'$ is cheaper to the principal, so the new contract is an improvement over the original, a contradiction. \hspace{.5in} $\square$
+                                                                                                                                                                                                                                                                                                                                                                         
+\end{proof}
+
+With that, I now derive optimal contract where $IC \la 1^1_1 \ra$ is not binding.
+
+\begin{proposition*}
+The optimal contract when $IC \la 1^1_1 \ra$ is not binding is the following:
+\eq{
+&w_F=w_{FF}=w_{SF}=0, \notag \\
+ \notag \\
+&w_{FS} =\alpha_1, \notag \\
+ \notag \\
+ &w_{SS} =\frac{c_2}{E[p_2|S,2] - p_0}, \notag \\
+ \notag \\
+&w_S= \frac{\alpha_2}{E^L[p_2]-p_0} \notag 
+}
+where
+\eq{
+\alpha_2=& c_2 - E^L[p_2](c_1-c_2) +p_0 c_1 + p_1 (E^L[p_2]-p_0) \alpha_1  \notag \\
+&- \frac{E^L[p_2]E^L[p_2|S,2]-p_0^2}{E^L[p_2|S,2]-p_0}  \notag 
+}
+\end{proposition*}
+
+\begin{proof}
+
+Here we prove that it is impossible to improve on this contract. 
+
+First, the $w_{SS} = \frac{c_1}{p_1 - p_0}$ satisfies $\la 2^1_1\ra$ and $\la 2^0_1\ra$.
+
+Second, $w_{SS}$ and $w_{S}$ satisfy $IC \la 0^0_1 \ra $ by construction, and it is binding. Also, since $(p_1-p_0) w_{SS}  \le c_1$, $IC \la 0^0_1\ra$ implies $IC \la 0^1_1\ra$. Any $w_{SS}'>w_{SS}$ would make $IC \la 0^1_1 \ra$ binding, under which $w_{SS}'>w_{SS}$ and $w_{S}'<w_S$ would not be satisfied. On the other hand, $w_{SS}'=w_{SS} - \epsilon$ and $w_S'=w_S+\overline{E}[p_2] \epsilon$  would violate $IC \la 0^0_1 \ra$ under the assumption that $\overline{E}[p_2] < E[p_2] + p_0)$. 
+
+Similarly, since $(E^L[p_2] - p_0) w_{SS} \le c_2$, $IC \la 0^0_1\ra$ implies $IC \la 0^2_1\ra$. Specifically, $(E^L[p_2] - p_0) w_{SS} = \frac{ E^L[p_2] - p_0}{p_1-p_0} c_1\le c_2$, where the last inequality ones from our initial assumption.            \hspace{.5in} $\square$
+
+\end{proof}
+
+Now, I derive the optimal contract when $\la 1^1_1 \ra$ is binding, which gives us
+\eq{
+ &(p_1-E^L[p_2])(w_S-w_F) + (p_1 p_1-E^L[p_2] E^L[p_2 | S,2]  )( w_{SS} ) + p_1 (p_1-E^L[p_2]) \frac{c_1}{p_1-p_0}   \notag \\
+& = (c_1 - c_2) + E^L[p_2] (c_1 - c_2) \notag .
+}
+
+Plugging in this expression into the other constraints, we have
+
+\eq{
+IC\la0^0_1\ra: \hspace{.5in} & (p_1-p_0)(w_S-w_F) + (p_1p_1- p_0 p_0 )w_{SS}  - p_1 c_1 \notag \\
+& \ge c_1 + p_0 c_1\notag \\
+\notag 
+\\
+IC\la0^1_1\ra: \hspace{.5in}  & (p_1-p_0)(w_S-w_F) + (p_1p_1- p_0 p_1 ) w_{SS} - p_1 c_1 \notag \\
+& \ge c_1  \notag \\
+\notag 
+\\
+IC\la0^2_1\ra: \hspace{.5in}  & (p_1-p_0)(w_S-w_F) + (p_1p_1-E^L[p_2] p_0)w_{SS} - p_1 c_1 \notag \\
+& \ge c_1 + p_0 c_1 - p_0 c_2 \notag 
+} 
+
+
+Then it's clear that $w_F=0$. Otherwise, we can also set $w_F=0$, which is a cheaper to the principal and it satisfies all the IC constraints.
+
+\begin{proposition*}
+The optimal contract when $\la 1^1_1 \ra$ is binding is the following:
+\eq{
+&w_F=w_{FF}=w_{SF} = 0, \notag \\
+\notag \\
+&w_{FS} = w_{SS} = \frac{c_1}{p_1-p_0} \notag \\
+\notag \\
+&w_S=w^{111}_{S} = \frac{c_1 +p_0c_1 +p_1 c_1 - (p_1 p_1 - p_0 p_0) \frac{c_1}{p_1-p_0} }{p_1-p_0}. \notag
+}
+\end{proposition*}
+
+\begin{proof}
+
+Here we prove that it is impossible to improve on this contract. 
+
+First, the $w_{SS} = \frac{c_1}{p_1 - p_0}$ satisfies $\la 2^1_1\ra$ and $\la 2^0_1\ra$.
+
+Second, $w_{SS}$ and $w_{S}$ satisfy $IC \la 0^0_1 \ra $ by construction, and it is binding. Also, since $(p_1-p_0) w_{SS}  \le c_1$, $IC \la 0^0_1\ra$ implies $IC \la 0^1_1\ra$. Any $w_{SS}'>w_{SS}$ would make $IC \la 0^1_1 \ra$ binding, under which $w_{SS}'>w_{SS}$ and $w_{S}'<w_S$ would not be satisfied. On the other hand, $w_{SS}'=w_{SS} - \epsilon$ and $w_S'=w_S+\overline{E}[p_2] \epsilon$  would violate $IC \la 0^0_1 \ra$ under the assumption that $\overline{E}[p_2] < E[p_2] + p_0)$. 
+
+Similarly, since $(E^L[p_2] - p_0) w_{SS} \le c_2$, $IC \la 0^0_1\ra$ implies $IC \la 0^2_1\ra$. Specifically, $(E^L[p_2] - p_0) w_{SS} = \frac{ E^L[p_2] - p_0}{p_1-p_0}c_1\le c_2$, where the last inequality ones from our initial assumption.                                                    
+
+\end{proof}
+
+Therefore, the optimal contract under all cases will be
+
+\eq{
+&w_F=w_{FF}=w_{SF} = 0, \notag \\
+\notag \\
+&w_{FS} =  \frac{c_1}{p_1-p_0} \notag \\
+\notag \\
+&w_{SS} =  \frac{c_2}{E[p_2|S,2]-p_0} +\beta_1 (w^{111}_S -\frac{\alpha_2}{E^L[p_2]-p_0} )^+ \notag \\
+\notag \\
+&w_S=  \frac{\alpha_2}{E^L[p_2]-p_0} + (w^{111}_S -\frac{\alpha_2}{E^L[p_2]-p_0} )^+ \notag 
+}
+
+
+%%%%%%%%%	Tolerance for Failure %%%%%%%%%%
+\newpage
+\section{Proof of Proposition \ref{failure}}
+The principal can now offer a wage contract that contains four parameters:
+
+\[ \vec{w} =\{w_{SS}, w_{SF}, w_{FS}, w_{FF} \} . \]
+
+The optimal wage contract that implements the desired action $ \la i^j_k \ra$ is
+\[ \vec{w}^* = \arg\min W(\vec{w}, \la i^j_k \ra)  \]
+
+subject to the incentive-compatibility constraints and the additional constraint under this case:
+\[ W_a(\vec{w}^*, \la i^j_k \ra)  - C(\la i^j_k \ra) \ge W_a(\vec{w}^*, <l^m_n>)  - C(<l^m_n>) \hspace{.5in} \text{IC$(<l^m_n>)$} \]
+\[ w_S = w_F = 0. \hspace{.5in} \text{Unobservabe intermediate signal.}  \]
+
+From the proof of Proposition \ref{exploration}, we can prove that the non-redundant IC constraints are the following (whose proofs do not depend on the value of $w_F$ or $w_S$, and therefore, would go through):
+
+\eq{
+IC\la1^1_1\ra: \hspace{.5in} & (p_1 p_1 - E^L[p_2]E^L[p_2 | S,2] )( w_{SS} -w_{SF} ) \notag \\
+& +(p_1-E^L[p_2]) w_{SF} + p_1 (p_1-E^L[p_2]) \frac{c_1}{p_1-p_0} \notag \\
+& \le c_2  - E^L[p_2] (c_1 - c_2) \notag 
+\\
+\notag 
+\\
+IC\la0^j_1\ra: \hspace{.5in} & (E^L[p_2] E^L[p_2 | S,2] - p_0 E^L[p_j] ) (w_{SS} -w_{SF}) \notag \\
+& + (E^L[p_2] - p_0 ) w_{SF} - p_1 (E^L[p_2] - p_0) w_{FS} \notag \\
+& \ge c_2 + E^L[p_2] c_2 + (1-E^L[p_2]) c_1 - ( p_0 c_j + (1-p_0) c_1 ) \notag 
+\\
+\notag 
+\\
+IC\la2^1_1\ra: \hspace{.5in} & (E^L[p_2|S,2]-p_1)(w_{SS}-w_{SF}) \ge c_2-c_1 \notag 
+\\
+\notag 
+\\
+IC\la2^0_1\ra: \hspace{.5in} & (E^L[p_2|S,2]-p_0)(w_{SS}-w_{SF}) \ge c_2. \notag 
+}
+
+We will proceed once again to derive the optimal contracts in case where $IC\la1^1_1\ra$ is not binding first, then derive the optimal constraints when the constraint is binding, and compare the two contracts to come up with a global optimal solution. 
+
+First, with $IC \la 0^j_1 \ra$, we have the standard result that the best reward is given for success, such that $w_{SF}=0$, and $w_{SS}>0$. But we also have $IC \la 2^1_1 \ra$. Therefore, $w_{SS} - w_{SF} = \frac{c_1 - c_2}{p_1 - E^L[p_2 | S, 2]}$ from the $IC \la 2^1_1 \ra$. Then, we can plug in this expression into $IC \la 0^j_1 \ra$ to solve for $w_{SF}$. 
+
+\eq{
+w_{SF} = \frac{w^{0j1}}{E^L[p_2] - p_0},  \notag 
+}
+where,
+\eq{
+w^{0j1} =& \max_{j \in \{0,1,2 \}} \{ c_2 + E^L[p_2] c_2 + ( E^L[p_2] - p_0 ) c_1 - p_0 c_j \notag \\
+& + p_1 (E^L[p_2] - p_0) \frac{c_1}{p_1 - p_0} \notag \\
+& - (E^L[p_2] E^L[p_2 | S,2] - p_0 E^L[p_j]) \frac{c_1 - c_2}{p_1 - E^L[p_2 | S,2]}  \}	\notag .
+}
+
+Plugging back $w_{SF}$ into the $IC \la 2^1_1 \ra$, we obtain
+\eq{
+w_{SS} =\frac{c_1 - c_2}{p_1 - E^L[p_2 | S, 2]}+ \frac{w^{0j1}}{E^L[p_2] - p_0}.  \notag 
+}
+
+Secondly, we have to the feasibility of this contract satisfies the upper bound limit from $IC \la1^1_1 \ra$. The $IC \la 1^1_1 \ra$ is satisfied if
+\eq{
+(p_1 - E^L[p_2]) w_{SF} \le & (c_1-c_2) (1+E^L[p_2] + p_1 (p_1 - E^L[p_2]) \frac{ c_1} {p_1 - p_0} \notag \\
+& - (p_1 p_1 - E^L[p_2] E^L[p_2 |S,2]) \frac{c_1 - c_2}{ p_1 - E^L[p_2 |S, 2]}. \notag 
+}
+
+
+
+\end{document}
+
+
+
+
+
+
