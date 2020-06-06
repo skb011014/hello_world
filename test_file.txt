@@ -1,4 +1,4 @@
 Test textfile
-
-
 pushing local commits to github
+
+git pull will update the local files
